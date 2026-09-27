@@ -82,3 +82,8 @@ test/                    node:test tests for the order rules
 | ![](docs/screenshots/4-attendees.png) | ![](docs/screenshots/5-payment.png) | ![](docs/screenshots/7-order.png) | ![](docs/screenshots/8-download.png) |
 
 Desktop home: ![](docs/screenshots/1-home.png)
+
+
+## Deployment branch
+
+`main` is the production/demo deployment branch. The GitHub Pages workflow runs from this branch.
