@@ -6,6 +6,7 @@ import { miniCelebrate, celebrate } from '../animations.js';
 import { ticketPng, saveBlob, qrDataUrl } from '../ticketImage.js';
 import { ART } from '../art.js';
 import { esc, money, fmtDate, EMAIL_RE, toast, sleep } from '../util.js';
+import { logo } from '../brand.js';
 
 const kindOf = (t) => venueById(eventById(t.eventId).host || eventById(t.eventId).venue).animation;
 
@@ -26,6 +27,7 @@ function ticketCard(t, { actions = true } = {}) {
         </dl>
       </div>
       <div class="ticket-stub">
+        <div class="ticket-brand">${logo({ size: 'sm' })}</div>
         <img class="qr" alt="QR code for ticket ${esc(t.id)}" data-code="${esc(t.code)}" width="150" height="150">
         <code>${esc(t.id)}</code>
         ${
@@ -191,6 +193,7 @@ export function renderSharedTicket(root, code) {
   }
   root.innerHTML = `
     <section class="section shared">
+      ${logo({ size: 'md', slogan: true })}
       <h1>🎟️ Your ticket</h1>
       <p class="muted">Someone sent you a ticket. Save it to your phone and show the QR at the gate.</p>
       <div class="tickets">${ticketCard(t, { actions: false })}</div>

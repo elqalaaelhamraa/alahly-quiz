@@ -5,6 +5,7 @@ import { createOrder, joinWaitlist, ApiError } from '../api.js';
 import { celebrate } from '../animations.js';
 import { click } from '../sound.js';
 import { esc, money, fmtDate, EMAIL_RE, toast } from '../util.js';
+import { logo } from '../brand.js';
 
 const STEPS = ['Tickets', 'Who’s going', 'Payment'];
 const PAYMENTS = [
@@ -170,7 +171,8 @@ export function renderBooking(root, eventId) {
           .join('')}
         <div><span>Service fee (${SERVICE_FEE_RATE * 100}%)</span><span>${money(p.fees)}</span></div>
         <div class="grand"><span>Total</span><span>${money(p.total)}</span></div>
-      </div>`;
+      </div>
+      <p class="secured">Secure checkout by ${logo({ size: 'sm' })}</p>`;
   }
 
   function summaryBar() {

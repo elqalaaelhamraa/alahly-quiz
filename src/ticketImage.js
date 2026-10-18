@@ -2,6 +2,7 @@
 import QRCode from 'qrcode';
 import { eventById, venueById } from './data/venues.js';
 import { fmtDate } from './util.js';
+import { qMarkSvgSource, SLOGAN } from './brand.js';
 
 export const qrDataUrl = (code, width = 280) =>
   QRCode.toDataURL(code, { width, margin: 1, color: { dark: '#111111', light: '#ffffff' } });
@@ -107,20 +108,44 @@ export async function ticketPng(ticket) {
   ctx.setLineDash([]);
 
   const qr = new Image();
-  qr.src = await qrDataUrl(ticket.code, 440);
+  qr.src = await qrDataUrl(ticket.code, 400);
   await qr.decode();
-  ctx.drawImage(qr, (W - 440) / 2, 850, 440, 440);
+  ctx.drawImage(qr, (W - 400) / 2, 830, 400, 400);
 
   ctx.fillStyle = '#111';
-  ctx.font = font(800, 34);
+  ctx.font = font(800, 32);
   const idW = ctx.measureText(ticket.id).width;
-  ctx.fillText(ticket.id, (W - idW) / 2, 1340);
+  ctx.fillText(ticket.id, (W - idW) / 2, 1272);
   ctx.fillStyle = '#777';
-  ctx.font = font(600, 22);
+  ctx.font = font(600, 21);
   const note = 'Show this QR code at the gate · one scan per ticket';
-  ctx.fillText(note, (W - ctx.measureText(note).width) / 2, 1390);
+  ctx.fillText(note, (W - ctx.measureText(note).width) / 2, 1310);
+
+  await drawLogo(ctx, W / 2, 1340);
 
   return new Promise((resolve) => c.toBlob(resolve, 'image/png'));
+}
+
+// QPASS lockup (Q mark + PASS + slogan), centred on cx, top at y.
+async function drawLogo(ctx, cx, y) {
+  await document.fonts?.load('40px Michroma').catch(() => {});
+  const q = new Image();
+  q.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(qMarkSvgSource());
+  await q.decode();
+  const qs = 76;
+  ctx.font = '400 28px Michroma, Cairo, sans-serif';
+  ctx.letterSpacing = '4px';
+  const ww = ctx.measureText('PASS').width;
+  const gap = 8;
+  const x = cx - (qs + gap + ww) / 2;
+  ctx.drawImage(q, x, y, qs, qs);
+  ctx.fillStyle = '#111';
+  ctx.fillText('PASS', x + qs + gap, y + qs - 14);
+  ctx.font = '400 13px Michroma, Cairo, sans-serif';
+  ctx.letterSpacing = '5px';
+  ctx.fillStyle = '#0fae8d';
+  ctx.fillText(SLOGAN, x + qs + gap, y + qs + 8);
+  ctx.letterSpacing = '0px';
 }
 
 export function saveBlob(blob, filename) {

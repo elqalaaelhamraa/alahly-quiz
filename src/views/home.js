@@ -1,6 +1,7 @@
 import { VENUES, EVENTS, venueById } from '../data/venues.js';
 import { ART, pyramids } from '../art.js';
 import { esc, money, dateBadge } from '../util.js';
+import { logo } from '../brand.js';
 
 export function renderHome(root) {
   const upcoming = EVENTS.filter((e) => e.status === 'on_sale' && e.dateMode === 'fixed')
@@ -9,7 +10,7 @@ export function renderHome(root) {
 
   root.innerHTML = `
     <section class="home-hero">
-      <p class="eyebrow">Ahly Group Tickets</p>
+      ${logo({ size: 'lg', slogan: true })}
       <h1>Where are we going<span class="dot">?</span></h1>
       <p class="lead">One pass to the stadium, the zoo, the sky above the Pyramids and every show in between.</p>
     </section>

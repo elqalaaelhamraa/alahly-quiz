@@ -1,4 +1,4 @@
-# Ahly Group Tickets 🎟️
+# QPASS – *your way in* 🎟️
 
 One ticketing hub for the group's destinations:
 
@@ -11,6 +11,13 @@ One ticketing hub for the group's destinations:
 
 Inspired by Tazkarti / Ticketmarche: event schedule per venue, ticket categories, Fan ID for stadium
 tickets, local payment methods (card, Fawry, mobile wallets, InstaPay).
+
+## Brand
+
+The QPASS logo (metallic black Q with a ticket-shaped tail and teal glow, plus the PASS wordmark and the
+*your way in* slogan) is recreated as SVG in `src/brand.js` and used on the splash screen, navbar, homepage
+hero, footer, checkout, digital tickets, downloaded ticket images and ticket emails. The wordmark font
+(Michroma) is bundled locally via `@fontsource/michroma`.
 
 ## Features
 
@@ -73,15 +80,17 @@ test/                    node:test tests for the order rules
 
 ## Design
 
-| Home | Lion roar (Giza Zoo) | Eagle (Al Ahly) | Balloon (Pyramids) |
-|---|---|---|---|
-| ![](docs/screenshots/1-home-mobile.png) | ![](docs/screenshots/6-lion-roar.png) | ![](docs/screenshots/9-eagle.png) | ![](docs/screenshots/9-balloon.png) |
+| Splash | Home | Lion roar (Giza Zoo) | Eagle (Al Ahly) | Balloon (Pyramids) |
+|---|---|---|---|---|
+| ![](docs/screenshots/0-splash-mobile.png) | ![](docs/screenshots/1-home-mobile.png) | ![](docs/screenshots/6-lion-roar.png) | ![](docs/screenshots/9-eagle.png) | ![](docs/screenshots/9-balloon.png) |
 
 | Who's going (buy for friends) | Payment | Tickets | Download animation |
 |---|---|---|---|
 | ![](docs/screenshots/4-attendees.png) | ![](docs/screenshots/5-payment.png) | ![](docs/screenshots/7-order.png) | ![](docs/screenshots/8-download.png) |
 
 Desktop home: ![](docs/screenshots/1-home.png)
+
+Downloaded ticket: ![](docs/screenshots/ticket-download.png)
 
 
 ## Deployment branch

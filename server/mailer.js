@@ -5,7 +5,7 @@ import { OrderError } from './orders.js';
 
 const EMAIL_RE = /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']{2,}$/;
 const PUBLIC_URL = (process.env.PUBLIC_URL || 'http://localhost:5173').replace(/\/$/, '');
-const FROM = process.env.MAIL_FROM || 'Ahly Group Tickets <tickets@example.com>';
+const FROM = process.env.MAIL_FROM || 'QPASS <tickets@example.com>';
 
 // Real SMTP when configured, otherwise a JSON transport that just logs (demo mode).
 const smtpConfigured = Boolean(process.env.SMTP_HOST);
@@ -54,10 +54,14 @@ export async function sendTicketsEmail({ to, tickets, fromName, message }) {
 
   const html = `
     <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#111">
+      <div style="background:#0b0b0c;color:#fff;padding:18px 22px;border-radius:16px;margin-bottom:12px">
+        <div style="font-size:26px;font-weight:800;letter-spacing:6px"><span style="color:#19f0c3">Q</span>PASS</div>
+        <div style="color:#19f0c3;font-size:12px;letter-spacing:4px">your way in</div>
+      </div>
       <h2>🎟️ ${sender} sent you ${tickets.length > 1 ? tickets.length + ' tickets' : 'a ticket'}!</h2>
       ${note}
       ${cards.join('')}
-      <p style="color:#666;font-size:12px">Show the QR code at the gate. Each code can be scanned once.</p>
+      <p style="color:#666;font-size:12px">Show the QR code at the gate. Each code can be scanned once.<br>QPASS · your way in</p>
     </div>`;
 
   const info = await transport.sendMail({

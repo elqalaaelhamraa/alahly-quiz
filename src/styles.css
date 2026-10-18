@@ -43,16 +43,11 @@ button { font: inherit; }
   border-bottom: 1px solid var(--line);
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; }
-.brand b { color: var(--primary-2); }
-.brand-mark {
-  display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--primary), #6b0012); font-weight: 900; letter-spacing: -1px;
-}
 .topbar-actions { display: flex; gap: 8px; align-items: center; }
 .icon-btn { background: var(--card); border: 1px solid var(--line); color: var(--text); width: 38px; height: 38px; border-radius: 12px; cursor: pointer; }
 .count { background: var(--primary); border-radius: 999px; padding: 0 8px; font-size: 0.8rem; margin-left: 4px; }
 
-.view { max-width: 1180px; margin: 0 auto; padding: 0 16px 140px; animation: viewIn 0.45s ease both; }
+.view { max-width: 1180px; margin: 0 auto; padding: 0 16px 48px; animation: viewIn 0.45s ease both; }
 @keyframes viewIn { from { opacity: 0; transform: translateY(12px); } }
 
 /* ───────── Buttons & form ───────── */
@@ -458,7 +453,45 @@ input[type='date'] { color-scheme: dark; }
 
 /* compact header on phones */
 .topbar .btn, .brand { white-space: nowrap; }
-@media (max-width: 440px) {
-  .brand > span:last-child { font-size: 0.95rem; }
-  .brand > span:last-child b { display: block; line-height: 1; }
+
+/* ───────── QPASS brand ───────── */
+:root { --teal: #19f0c3; --brand-font: 'Michroma', 'Cairo', system-ui, sans-serif; }
+.qpass { display: inline-grid; justify-items: start; gap: 2px; text-decoration: none; color: var(--text); line-height: 1; }
+.qpass-row { display: inline-flex; align-items: flex-end; }
+.q-mark { width: var(--q, 40px); height: var(--q, 40px); flex: none; overflow: visible; }
+.qpass-word {
+  font-family: var(--brand-font); font-weight: 400; letter-spacing: 0.16em;
+  font-size: calc(var(--q, 40px) * 0.34); margin-left: calc(var(--q, 40px) * 0.08); padding-bottom: calc(var(--q, 40px) * 0.17);
 }
+.qpass-slogan {
+  font-family: var(--brand-font); font-size: calc(var(--q, 40px) * 0.15); letter-spacing: 0.32em; text-transform: lowercase;
+  color: var(--teal); padding-left: calc(var(--q, 40px) * 1.1); text-shadow: 0 0 12px rgba(25, 240, 195, .45);
+}
+.qpass-sm { --q: 42px; }
+.qpass-md { --q: 56px; }
+.qpass-lg { --q: 96px; }
+.qpass-xl { --q: clamp(110px, 30vw, 170px); }
+.qpass.on-light { color: #111; }
+
+.splash {
+  position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; align-content: center; gap: 34px;
+  background: radial-gradient(600px 400px at 50% 45%, #0f2a26 0%, #07090a 70%); transition: opacity .5s;
+}
+.splash.out { opacity: 0; pointer-events: none; }
+.splash .q-ring { stroke-dasharray: 400; stroke-dashoffset: 400; animation: qDraw 1s cubic-bezier(.6,0,.2,1) forwards; }
+.splash .q-tail { opacity: 0; animation: qTail .6s .7s cubic-bezier(.2,.9,.3,1.3) forwards; }
+.splash .q-glow { opacity: 0; animation: qGlow 1.2s .9s ease forwards; }
+.splash .qpass-word, .splash .qpass-slogan { opacity: 0; animation: textIn .6s 1s forwards; transform: translateY(8px); }
+.splash .qpass-slogan { animation-delay: 1.2s; }
+.splash-bar { width: 140px; height: 3px; border-radius: 3px; background: rgba(255,255,255,.1); overflow: hidden; }
+.splash-bar i { display: block; height: 100%; width: 0; background: var(--teal); box-shadow: 0 0 10px var(--teal); animation: prog 1.7s ease-out forwards; }
+@keyframes qDraw { to { stroke-dashoffset: 0; } }
+@keyframes qTail { from { opacity: 0; transform: translate(70px, 70px) rotate(45deg); } to { opacity: 1; transform: translate(92px, 94px) rotate(45deg); } }
+@keyframes qGlow { 50% { opacity: 1; } to { opacity: .9; } }
+
+.home-hero .qpass { margin-bottom: 18px; }
+.site-footer { max-width: 1180px; margin: 0 auto; padding: 30px 16px 110px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between; color: var(--muted); font-size: .88rem; }
+.ticket-brand { display: flex; justify-content: center; }
+.ticket-brand .qpass { --q: 28px; color: #111; }
+.secured { display: flex; align-items: center; gap: 10px; justify-content: center; color: var(--muted); font-size: .85rem; margin-top: 4px; }
+.secured .qpass { --q: 26px; }
